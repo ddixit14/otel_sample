@@ -7,12 +7,10 @@ import com.google.api.gax.tracing.MetricsTracerFactory;
 import com.google.api.gax.tracing.OpentelemetryMetricsRecorder;
 import com.google.cloud.opentelemetry.metric.GoogleCloudMetricExporter;
 import com.google.cloud.opentelemetry.metric.MetricConfiguration;
-import com.google.cloud.opentelemetry.metric.MetricDescriptorStrategy;
 import com.google.cloud.spanner.*;
 import com.google.cloud.spanner.spi.v1.SpannerRpcViews;
 import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.api.metrics.Meter;
-import io.opentelemetry.exporter.otlp.metrics.OtlpGrpcMetricExporter;
 import io.opentelemetry.sdk.OpenTelemetrySdk;
 import io.opentelemetry.sdk.metrics.SdkMeterProvider;
 import io.opentelemetry.sdk.metrics.export.MetricExporter;
@@ -31,7 +29,7 @@ public class SpannerController {
   private String databaseId = "mydatabase";
   private String table = "Players";
 
-  SpannerController() throws Exception{
+  SpannerController() {
 
     // Instantiate the client.
     SpannerOptions options = SpannerOptions.newBuilder().setApiTracerFactory(createOpenTelemetryTracerFactory()).build();
@@ -52,8 +50,6 @@ public class SpannerController {
             // Configure the cloud project id.  Note: this is autodiscovered by default.
             .setProjectId("spanner-demo-326919")
             .setPrefix("custom.googleapis.com")
-            // Configure a strategy for how/when to configure metric descriptors.
-            .setDescriptorStrategy(MetricDescriptorStrategy.SEND_ONCE)
             .build());
 
     // Periodic Metric Reader configuration

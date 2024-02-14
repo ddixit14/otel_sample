@@ -12,9 +12,5 @@ public class MetricsSampleApplication {
 
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(MetricsSampleApplication.class, args);
-		StackdriverStatsConfiguration configuration = StackdriverStatsConfiguration.builder()
-				.setMetricNamePrefix("custom.googleapis.com")
-				.build();
-		StackdriverStatsExporter.createAndRegister(configuration);
 	}
 }
